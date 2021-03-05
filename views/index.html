@@ -1,0 +1,57 @@
+{{extend './_layouts/home.html'}}
+{{block 'title'}}{{'多人博客 - 首页'}}{{/block}}
+{{block 'body'}}
+<section class="container">
+    <ul class="media-list">
+        {{ each topic }}
+        <li class="media">
+            <div class="media-left">
+                <a href="#">
+                    <img width="40" height="40" class="media-object" src="/public/img/avatar-default.png" alt="...">
+                </a>
+            </div>
+            <div class="media-body">
+                <h4 class="media-heading"><a href="/topics/show?id={{$value.id}}">{{ $value.title }}</a></h4>
+                <p>我是结尾</p>
+            </div>
+        </li>
+        {{ /each }}
+    </ul>
+    <!-- 分页 -->
+    <nav aria-label="Page navigation">
+        <ul class="pagination">
+            <li>
+                {{if page !== 1}}
+                <a href="/?page={{page - 1}}" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+                {{else}}
+                <a href="#" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+                {{/if}}
+            </li>
+            <% for(var i = 0; i < totalPage; i++){ %>
+            {{ if (i + 1) === page }}
+            <li class="active"><a href="/?page={{ i + 1 }}">{{ i + 1 }}</a></li>
+            {{ else }}
+            <li><a href="/?page={{ i + 1 }}">{{ i + 1 }}</a></li>
+            {{ /if }}
+            <% } %>
+            <li>
+                {{if page === totalPage}}
+                <a href="#" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+                {{ else }}
+                <a href="/?page={{page + 1}}" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+                {{/if}}
+            </li>
+        </ul>
+    </nav>
+</section>
+<script>
+</script>
+{{/block}}
